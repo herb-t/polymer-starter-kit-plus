@@ -9,6 +9,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
@@ -21,6 +26,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         
         min-height: 2000px;
       }
+
+      paper-textarea {
+        width: 300px;
+        height: 300px;
+      }
+
+      .content {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-align-items: center;
+                align-items: center;
+        -webkit-justify-content: center;
+                justify-content: center;
+      }
     </style>
 
     <div class="card">
@@ -29,7 +54,53 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <p>Home Page Madness ya'll!</p>
       <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat delectus alias nihil exercitationem unde obcaecati labore cum asperiores velit tempore illum reiciendis, hic, nam, vero libero corrupti ad, inventore magni.</p>
+
+      <!-- scroallable modal -->
+      <h3>paper-dialog-scrollable</h3>
+      <paper-button raised on-click="_onOpen">Open</paper-button>
+      <paper-dialog id="dialog" with-backdrop on-iron-overlay-opened="_patchOverlay">
+        <h2>Scrollable</h2>
+        <paper-dialog-scrollable>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </paper-dialog-scrollable>
+        <div class="buttons">
+          <paper-button raised dialog-dismiss>Close</paper-button>
+        </div>
+      </paper-dialog>
+
+      <br>
+      <br>
+
+      <!-- scroallable modal -->
+      <h3>paper-dialog</h3>
+      <paper-button raised on-click="_onOpen2">Open</paper-button>
+      <paper-dialog id="dialog2" with-backdrop on-iron-overlay-opened="_patchOverlay">
+        <div class="content">
+
+          <paper-input label="name">
+            <iron-icon icon="mail" prefix></iron-icon>
+          </paper-input>
+
+          <paper-input label="email">
+            <iron-icon icon="mail" prefix></iron-icon>
+          </paper-input>
+
+          <paper-textarea label="comments"></paper-textarea>
+
+          <paper-button raised dialog-dismiss>Submit</paper-button>
+
+        </div>
+
+      </paper-dialog>
     </div>
+
+    
   </template>
 
   <script>
@@ -38,7 +109,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       ready: function() {
         console.log('Homepage up!');
-      }
+      },
+
+      _onOpen: function() {
+        this.$.dialog.open()
+      },
+
+      _onOpen2: function() {
+        this.$.dialog2.open()
+      },
+
+      _onModalOpen: function(e) {
+        this._disableScroll();
+      },
+
+      _onModalClose: function() {
+        // var video = this.querySelector('[is=yt-creator-hub-video]');
+        // if (video && video.isPlaying()) {
+        //   video.pause();
+        // }
+        this._enableScroll();
+      },
+
+      _patchOverlay: function (e) {
+        if (e.target.withBackdrop) {
+          e.target.parentNode.insertBefore(e.target._backdrop, e.target);
+        }
+      },
+
     });
   </script>
 </dom-module>
