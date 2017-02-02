@@ -9,25 +9,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
-<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../bower_components/paper-drawer-panel/paper-drawer-panel.html">
 <link rel="import" href="../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+
+<!-- custom elements -->
+<link rel="import" href="normalize.html">
+<link rel="import" href="shared-styles.html">
 <link rel="import" href="my-icons.html">
+
+<!-- TweenMax -->
+<script src="TweenMax.min.js"></script>
+<script src="ScrollToPlugin.min.js"></script>
 
 <dom-module id="site-application">
   <template>
-    <style>
+    <style include="normalize shared-styles">
+
       :host {
         --app-primary-color: #4285f4;
         --app-secondary-color: black;
@@ -35,19 +36,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
 
-      app-header {
-        color: #fff;
-        background-color: var(--app-primary-color);
-      }
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
+      /*
+      * paper-drawer-panel selector
+      * site shell
+      */
+      .site {
+
       }
 
-      .drawer-list {
-        margin: 0 20px;
-      }
-
-      .drawer-list a {
+      /*
+      * Off Canvas Nav
+      */
+      .offcanvas--links a {
         display: block;
         padding: 0 16px;
         text-decoration: none;
@@ -55,110 +55,126 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         line-height: 40px;
       }
 
-      .drawer-list a.iron-selected {
+      .offcanvas--links a.iron-selected {
         color: black;
         font-weight: bold;
       }
 
+      .offcanvas--links paper-icon-button {
+        color: black;
+        --paper-icon-button-ink-color: #4285f4;
+      }
 
-
-      .header-nav {
+      /*
+      * Header
+      */
+      .content--header-nav {
         display: -webkit-flex;
         display: -moz-flex;
         display: -ms-flex;
         display: -o-flex;
         display: flex;
+        -webkit-flex: 1px;
+        -ms-flex: 1px;
+        flex: 1px;
         -webkit-flex-direction: row;
             -ms-flex-direction: row;
                 flex-direction: row;
         -webkit-align-items: center;
                 align-items: center;
+        justify-content: space-between;
       }
+
+      .content--header-title {
+        -webkit-flex: 1px;
+        -ms-flex: 1px;
+        flex: 1px;
+      }
+
+      .content--menu-btn {
+        color: #fff;
+        --paper-icon-button-ink-color: #fff;
+      }
+
+      /*
+      * Main Content Styles
+      */
+      .site--content-main {
+
+      }
+
+
+      /* test styles - delete */
+      .__test-section {
+        height: 2000px;
+        width: 100%;
+      }
+
+      .s1 {
+        background: purple;
+      }
+
+      .s2 {
+        background: green;
+      }
+
+      .s3 {
+        background: red;
+      }
+
     </style>
 
-    <app-location route="{{route}}"></app-location>
-    <app-route
-        route="{{route}}"
-        pattern="/:page"
-        data="{{routeData}}"
-        tail="{{subroute}}"></app-route>
+    <!-- site shell -->
+    <paper-drawer-panel force-narrow disable-swipe class="site">
 
-    <!-- <app-drawer-layout force-narrow fullbleed>
-      
-      <app-drawer id="drawer">
-        <app-toolbar>Menu</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
-        </iron-selector>
-      </app-drawer>
-
-      
-      <app-header-layout has-scrolling-region>
-
-        <app-header condenses reveals effects="waterfall">
-          <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
-          </app-toolbar>
-        </app-header>
-
-        <iron-pages
-            selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="view404"
-            role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
-          <my-view404 name="view404"></my-view404>
-        </iron-pages>
-      </app-header-layout>
-    </app-drawer-layout> -->
-
-    <paper-drawer-panel force-narrow>
-
-      <paper-header-panel drawer id="paperDrawer">
-        <paper-toolbar>
-         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list flex" role="navigation">
-            <h3>Site</h3>
-           <a name="view1" href="/view1">View One</a>
-           <a name="view2" href="/view2">View Two</a>
-           <a name="view3" href="/view3">View Three</a>
-         </iron-selector>
+      <!-- off canvas menu -->
+      <paper-header-panel drawer class="site--offcanvas-nav" id="paperDrawer">
+        <!-- off canvas header -->
+        <paper-toolbar class="offcanvas--header">
+          <h3 class="offcanvas--header-title">Mobile</h3>
         </paper-toolbar>
+
+        <!-- off canvas nav -->
+        <iron-selector class="offcanvas--links" selected="[[page]]" attr-for-selected="name" role="navigation">
+           <a paper-drawer-toggle on-tap="_scrollToSectionOne">View One</a>
+           <a paper-drawer-toggle on-tap="_scrollToSectionTwo">View Two</a>
+           <a paper-drawer-toggle on-tap="_scrollToSectionThree">View Three</a>
+           <paper-icon-button icon="social:facebook-alt" class="content--menu-btn" paper-drawer-toggle></paper-icon-button>
+           <paper-icon-button icon="social:twitter-alt" class="content--menu-btn" paper-drawer-toggle></paper-icon-button>
+           <paper-icon-button icon="social:instagram" class="content--menu-btn" paper-drawer-toggle></paper-icon-button>
+        </iron-selector>
       </paper-header-panel>
-     
 
-      <paper-scroll-header-panel main>
-        
-        <paper-toolbar>
+      <!-- site main content section -->
+      <paper-scroll-header-panel main class="site--content" id="siteContent">
 
-          <paper-icon-button icon="arrow-back"></paper-icon-button>
-          <div class="flex title">Title</div>
+        <!-- main content header -->
+        <paper-toolbar class="site--content-header">
 
-          <iron-selector selected="[[page]]" attr-for-selected="name" class="header-nav" role="navigation">
-          <paper-button raised paper-drawer-toggle>Menu</paper-button>
-            <a name="view1" href="/view1">View One</a>
-            <a name="view2" href="/view2">View Two</a>
-            <a name="view3" href="/view3">View Three</a>
+          <!-- header nav left -->
+          <div class="content--header-title">Title</div>
+
+          <!-- header nav right/links -->
+          <iron-selector selected="[[page]]" attr-for-selected="name" class="content--header-nav" role="navigation">
+
+            <a on-tap="_scrollToSectionOne">View One</a>
+            <a on-tap="_scrollToSectionTwo">View Two</a>
+            <a on-tap="_scrollToSectionThree">View Three</a>
+            <!-- menu btn -->
+            <paper-icon-button icon="iconz:menu" class="content--menu-btn" paper-drawer-toggle></paper-icon-button>
+
           </iron-selector>
 
         </paper-toolbar>
 
-        <div class="content">
+        <!-- main content container -->
+        <div class="site--content-main">
 
-          <iron-pages
-              selected="[[page]]"
-              attr-for-selected="name"
-              fallback-selection="view404"
-              role="main">
-            <my-view1 name="view1"></my-view1>
-            <my-view2 name="view2"></my-view2>
-            <my-view3 name="view3"></my-view3>
-            <my-view404 name="view404"></my-view404>
-          </iron-pages>
+          <section class="s1 __test-section" id="sectionOne"></section>
+
+          <section class="s2 __test-section" id="sectionTwo"></section>
+
+          <section class="s3 __test-section" id="sectionThree"></section>
 
         </div>
 
@@ -169,38 +185,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
+
     Polymer({
       is: 'site-application',
 
       properties: {
-        page: {
-          type: String,
-          reflectToAttribute: true,
-          observer: '_pageChanged',
-        },
+
       },
 
-      observers: [
-        '_routePageChanged(routeData.page)',
-      ],
+      ready: function() {},
 
-      _routePageChanged: function(page) {
-        this.page = page || 'view1';
+      /*
+      * scroll to section animation
+      * @param (element): the element/section to animate to
+      */
+      navItemClicked: function(element) {
 
-        // if (!this.$.drawer.persistent) {
-        //   this.$.drawer.close();
-        // }
+        TweenMax.to(this.$.siteContent.scroller, 1, {
+            scrollTo: {
+                y: element.offsetTop,
+                autoKill: true
+            },
+            ease:Power2.easeOut
+        });
+
       },
 
-      _pageChanged: function(page) {
-        // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
-        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      _scrollToSectionOne: function() {
+        this.navItemClicked(this.$.sectionOne);
       },
 
-      _showPage404: function() {
-        this.page = 'view404';
+      _scrollToSectionTwo: function() {
+        this.navItemClicked(this.$.sectionTwo);
       },
+
+      _scrollToSectionThree: function() {
+        this.navItemClicked(this.$.sectionThree);
+      },
+
     });
   </script>
 </dom-module>
